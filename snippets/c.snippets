@@ -1,0 +1,140 @@
+## Main
+# main
+snippet main
+	int main(int argc, const char *argv[])
+	{
+		${0}
+		return 0;
+	}
+##
+## Preprocessor
+# #include <...>
+snippet inc
+	#include <${1:stdio}.h>
+# #include "..."
+snippet Inc
+	#include "${1:`vim_snippets#Filename("$1.h")`}"
+# ifndef...define...endif
+snippet ndef
+	#ifndef $1
+	#define ${1:SYMBOL} ${2:value}
+	#endif /* ifndef $1 */
+# define
+snippet def
+	#define
+# ifdef...endif
+snippet ifdef
+	#ifdef ${1:FOO}
+		${2:#define }
+	#endif
+# if
+snippet #if
+	#if ${1:FOO}
+		${0:${VISUAL}}
+	#endif
+# header include guard
+snippet once
+	#ifndef ${1:`toupper(vim_snippets#Filename('$1_H', 'UNTITLED_H'))`}
+
+	#define $1
+
+	${0}
+
+	#endif /* end of include guard: $1 */
+# Disable C++ name mangling in C headers
+snippet nocxx
+	#ifdef __cplusplus
+	extern "C" {
+	#endif
+
+	${0}
+
+	#ifdef __cplusplus
+	} /* extern "C" */
+	#endif
+##
+## Control Statements
+# if
+snippet if
+	if (${1:true}) {
+		${0:${VISUAL}}
+	}
+##
+## Loops
+# for
+snippet for
+	for (int ${2:i} = 0; $2 < ${1:count}; $2${3:++}) {
+		${4}
+	}
+# while
+snippet wh
+	while (${1:/* condition */}) {
+		${0:${VISUAL}}
+	}
+# do... while
+snippet do
+	do {
+		${0:${VISUAL}}
+	} while (${1:/* condition */});
+##
+## Functions
+# function definition
+snippet fun
+	${1:void} ${2:function_name}(${3})
+	{
+		${4}
+	}
+# function definition with Doxygen documentation
+snippet dfun0
+	/*! \brief ${1:Brief function description here}
+	 *
+	 *  ${2:Detailed description of the function}
+	 *
+	 * \return ${3:Return parameter description}
+	 */
+	${4:void} ${5:function_name}()
+	{
+		${6}
+	}
+## Types
+# typedef
+snippet td
+	typedef ${1:int} ${2:MyCustomType};
+# typedef struct
+snippet tds
+	/*! \struct $2
+	 *  \brief ${5:Brief struct description}
+	 *
+	 *  ${6:Detailed description}
+	 */
+	typedef struct ${2:_$1 }{
+		m_${3:Data} /*!< ${4:Description} */
+	} ${1:`vim_snippets#Filename('$1_t', 'name')`};
+
+# typedef enum
+snippet tde
+	typedef enum {
+		${1:Data} /*!< ${3:Description} */
+	} ${2:foo};
+##
+## Input/Output
+# printf
+snippet pr
+	printf("${1:%s}\n"${2});
+# fprintf (again, this isn't as nice as TextMate's version, but it works)
+snippet fpr
+	fprintf(${1:stderr}, "${2:%s}\n"${3});
+snippet prd
+	printf("${1:} = %d\n", $1);
+snippet prf
+	printf("${1:} = %f\n", $1);
+snippet prx
+	printf("${1:} = %${2}\n", $1);
+snippet TR
+	TRACE("${1:%s}: %d", __func__, __LINE__);
+snippet tr
+	TRACE("${1:%s}", ${2});
+## Miscellaneous
+# This is kind of convenient
+snippet .
+	[${1}]
