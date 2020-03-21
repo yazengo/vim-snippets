@@ -134,6 +134,8 @@ snippet TR
 	TRACE("${1:%s}: %d", __func__, __LINE__);
 snippet tr
 	TRACE("${1:%s}", ${2});
+snippet DUMP
+	DUMP8("%02x ", ${1:buf}, ${2:16});
 ## Miscellaneous
 # This is kind of convenient
 snippet .
