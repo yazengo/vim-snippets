@@ -13,9 +13,9 @@ snippet inc
 	#include <${1:stdio}.h>
 # #include "..."
 snippet Inc
-	#include "${1:`vim_snippets#Filename("$1.h")`}"
+	#include "${1}"
 # ifndef...define...endif
-snippet ndef
+snippet ifndef
 	#ifndef $1
 	#define ${1:SYMBOL} ${2:value}
 	#endif /* ifndef $1 */
@@ -34,15 +34,13 @@ snippet #if
 	#endif
 # header include guard
 snippet once
-	#ifndef ${1:`toupper(vim_snippets#Filename('$1_H', 'UNTITLED_H'))`}
-
+	#ifndef ${1}
 	#define $1
 
 	${0}
-
 	#endif /* end of include guard: $1 */
 # Disable C++ name mangling in C headers
-snippet nocxx
+snippet nocpp
 	#ifdef __cplusplus
 	extern "C" {
 	#endif
@@ -131,9 +129,9 @@ snippet prf
 snippet prx
 	printf("${1:} = %${2}\n", $1);
 snippet TR
-	TRACE("${1:%s}: %d", __func__, __LINE__);
+	TRACE(0, "${1:%s}: %d", __func__, __LINE__);
 snippet tr
-	TRACE("${1:%s}", ${2});
+	TRACE(0, "${1:%s}", ${2});
 snippet DUMP
 	DUMP8("%02x ", ${1:buf}, ${2:16});
 ## Miscellaneous
